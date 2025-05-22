@@ -183,7 +183,7 @@ async def call_tool(name: str, arguments: Dict[str, Any]) -> List[types.TextCont
         return [types.TextContent(type="text", text=f"Error: {str(e)}")]
 
 
-async def main():
+async def main_async():
     """Main entry point for the shell MCP server."""
     async with mcp.server.stdio.stdio_server() as (read_stream, write_stream):
         await server.run(
@@ -198,3 +198,7 @@ async def main():
                 ),
             ),
         )
+
+
+def main():
+    asyncio.run(main_async())
